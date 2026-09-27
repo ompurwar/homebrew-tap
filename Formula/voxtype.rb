@@ -1,9 +1,9 @@
 class Voxtype < Formula
   desc "Hold-to-talk voice typing for macOS with on-device Whisper and a local LLM"
   homepage "https://github.com/ompurwar/smart-transcriber"
-  url "https://github.com/ompurwar/smart-transcriber/archive/refs/tags/v0.1.1.tar.gz"
+  url "https://github.com/ompurwar/smart-transcriber/archive/refs/tags/v0.1.2.tar.gz"
   # The version is scanned from the URL, so it is not spelled out here.
-  sha256 "071cb7419f2d31240c06bcef73a718bf4df7fa7bde54001a4c5e7ee05b90e879"
+  sha256 "a7b87ddbdfb54e1e17679a5b473e2050589389821c9e4ec0d6133c0f19f57c0a"
   license "MIT"
 
   depends_on "sox"
@@ -20,6 +20,12 @@ class Voxtype < Formula
   def install
     bin.install "bin/voxtype"
     pkgshare.install "share/hammerspoon.lua"
+
+    # Stamp the tag into the binary. The version used to be hardcoded in the
+    # script and copied into the formula by hand, so the two drifted apart and
+    # the installed binary reported 0.1.0 from a 0.1.1 keg. The tag is the only
+    # place the version should be written down.
+    inreplace bin/"voxtype", /^VOXTYPE_VERSION=".*"$/, "VOXTYPE_VERSION=\"#{version}\""
   end
 
   def caveats
