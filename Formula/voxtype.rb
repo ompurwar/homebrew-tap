@@ -1,9 +1,9 @@
 class Voxtype < Formula
   desc "Hold-to-talk voice typing for macOS with on-device Whisper and a local LLM"
   homepage "https://github.com/ompurwar/smart-transcriber"
-  url "https://github.com/ompurwar/smart-transcriber/archive/refs/tags/v0.1.3.tar.gz"
+  url "https://github.com/ompurwar/smart-transcriber/archive/refs/tags/v0.1.5.tar.gz"
   # The version is scanned from the URL, so it is not spelled out here.
-  sha256 "cb5cb09a2e1e988046867cd598819fe35b424734a904803964646964a3a83a08"
+  sha256 "c683759a48e4bcdc137d22c54ad9770e7b1d8c54b33a848fb39000f3897a1ddb"
   license "MIT"
 
   depends_on "sox"
@@ -42,6 +42,12 @@ class Voxtype < Formula
 
         3. ollama pull qwen2.5:1.5b
            voxtype warmup
+
+      Steps 2 and 3 are the English setup, which is the default. For another
+      language, set VOXTYPE_LANGUAGE in your shell profile first (for example
+      "hi" for Hindi) and then run step 3 with the model that language wants:
+      `ollama pull qwen2.5:7b`. `voxtype config` prints the pair in effect, and
+      `voxtype doctor` says so if the models and the language disagree.
 
         4. Start Hammerspoon, then grant it Microphone and Accessibility access
            in System Settings > Privacy & Security. macOS will not let a script
